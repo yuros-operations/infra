@@ -241,6 +241,22 @@ mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/temp /mnt/tmp
 
 ## null (menyesuaikan)
 ```
+sudo cryptsetup luksFormat --type luks2 \
+--align-payload 4096 \
+--sector-size 4096 \
+--label "dm" \
+/dev/[nama partisi]
+```
+```
+cryptsetup open /dev/[nama partisi] _dev_dm_11 \
+--perf-no_read_workqueue \
+--perf-no_write_workqueue \
+--persistent
+```
+```
+mkfs.xfs -q -s size=4096 /dev/mapper/_dev_dm_11
+```
+```
 mkdir -p /mnt/home/[name]
 ```
 
