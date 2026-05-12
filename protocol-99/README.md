@@ -469,20 +469,6 @@ su http
 sudo su
 ```
 
-## user real
-
-```
-useradd -d /home/[user name] user
-```
-
-```
-chown -R user:user /home/[user name]
-```
-
-```
-passwd user
-```
-> password must same like luks for this partition
 ## os release
 
 ```
@@ -918,7 +904,8 @@ git clone https://github.com/almuhdilkarim/galium
 ```
 cp -r galium/conf/.* /srv/http
 ```
-## after login user
+
+## after login user using http
 ### preparation
 ```
 sudo cryptsetup luksFormat --type luks2 \
@@ -937,25 +924,83 @@ sudo cryptsetup open /dev/proc/[user name] _dev_dm_11 \
 sudo mkfs.xfs -q -s size=4096 /dev/mapper/_dev_dm_11
 ```
 ```
-sudo mkdir -p /mnt/home/[name]
+sudo mkdir -p /home/[name]
 ```
 
 ```
-sudo mount -o rw,nodev,nosuid,relatime /dev/proc/[name dir] /mnt/home/[name]
+sudo mount -o rw,nodev,nosuid,relatime /dev/mapper/_dev_dm_11 /home/[name]
 ```
 ```
 sudo pacman -S pam_mount
 ```
 ### Configure the Volume
+
+```
+nvim /etc/security/pam_mount.conf.xml
+```
+> adjust like the lines below
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE pam_mount SYSTEM "pam_mount.conf.xml.dtd">
+<!--
+	See pam_mount.conf(5) for a description.
+-->
+
+<pam_mount>
+
+		<!-- debug should come before everything else,
+		since this file is still processed in a single pass
+		from top-to-bottom -->
+
+<debug enable="0" />
+
+		<!-- Volume definitions -->
+
+
+		<!-- pam_mount parameters: General tunables -->
+
+<!--
+<luserconf name=".pam_mount.conf.xml" />
+-->
+
+<!-- Note that commenting out mntoptions will give you the defaults.
+     You will need to explicitly initialize it with the empty string
+     to reset the defaults to nothing. -->
+<mntoptions allow="nosuid,nodev,loop,encryption,fsck,nonempty,allow_root,allow_other" />
+<!--
+<mntoptions deny="suid,dev" />
+<mntoptions allow="*" />
+<mntoptions deny="*" />
+-->
+<mntoptions require="nosuid,nodev" />
+
+<!-- requires ofl from hxtools to be present -->
+<logout wait="0" hup="no" term="no" kill="no" />
+
+<!-- Example entry for a LUKS partition -->
+<volume 
+    user="[user name]" 
+    fstype="crypt" 
+    path="/dev/proc/[user name]" 
+    mountpoint="/home/[user name]" 
+/>
+		<!-- pam_mount parameters: Volume-related -->
+
+<mkmountpoint enable="1" remove="true" />
+
+
+</pam_mount>
+```
+
 Edit the `pam_mount` configuration file at `/etc/security/pam_mount.conf.xml`. You need to add a `<volume>` entry for your encrypted device.
 
 ```xml
 <!-- Example entry for a LUKS partition -->
 <volume 
-    user="your_username" 
+    user="[user name]" 
     fstype="crypt" 
-    path="/dev/partition_name" 
-    mountpoint="/home/your_username" 
+    path="/dev/proc/[user name]" 
+    mountpoint="/home/[user name]" 
 />
 ```
 *   **path:** The identifier for your encrypted partition (e.g., `/dev/sdb1` or a UUID).
@@ -963,6 +1008,37 @@ Edit the `pam_mount` configuration file at `/etc/security/pam_mount.conf.xml`. Y
 *   **options:** `allow-discard` is useful for SSD performance.
 
 ### Update PAM Configuration
+
+```
+nvim /etc/pam.d/system-login
+```
+> adjust like the lines below
+```
+#%PAM-1.0
+
+auth       required   pam_shells.so
+auth       requisite  pam_nologin.so
+auth       include    system-auth
+auth       required   pam_mount.so
+
+account    required   pam_access.so
+account    required   pam_nologin.so
+account    include    system-auth
+
+password   include    system-auth
+
+session    optional   pam_loginuid.so
+session    optional   pam_keyinit.so       force revoke
+session    include    system-auth
+session    optional   pam_lastlog2.so      silent
+session    optional   pam_motd.so
+session    optional   pam_mail.so          dir=/var/spool/mail standard quiet
+session    optional   pam_umask.so
+session    optional  pam_mount.so
+-session   optional   pam_systemd.so
+session    required   pam_env.so
+```
+
 You must tell the system to use `pam_mount` during the login process. Edit `/etc/pam.d/system-login` to include the following lines in the correct sections:
 
 ```pam
@@ -976,3 +1052,44 @@ session     optional    pam_mount.so
 
 ### Verification
 After saving the files, log out and log back in. The partition should automatically prompt for the password (via the login screen) and mount it to the specified location. You can verify this by running `lsblk` or `mount`.
+
+```
+lsblk
+```
+
+```
+NAME               MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
+nvme0n1            259:0    0 476.9G  0 disk  
+├─nvme0n1p1        259:1    0     4G  0 part  /boot
+├─nvme0n1p2        259:2    0     4G  0 part  [SWAP]
+├─nvme0n1p3        259:3    0   100G  0 part  
+│ └─proc           253:0    0   100G  0 crypt 
+│   ├─proc-ring    253:1    0     1G  0 lvm   
+│   ├─proc-root    253:2    0    20G  0 lvm   /
+│   ├─proc-vars    253:3    0     5G  0 lvm   /var
+│   ├─proc-vlog    253:4    0     1G  0 lvm   /var/log
+│   ├─proc-vtmp    253:5    0     1G  0 lvm   /var/tmp
+│   ├─proc-vpac    253:6    0   2.5G  0 lvm   /var/cache/pacman
+│   ├─proc-home    253:7    0     2G  0 lvm   /home
+│   ├─proc-vaud    253:8    0   512M  0 lvm   /var/log/audit
+│   ├─proc-temp    253:9    0     2G  0 lvm   /tmp
+│   ├─proc-srvc    253:10   0     1G  0 lvm   /srv/http
+│   └─proc-[user name]  253:11   0    50G  0 lvm   
+│     └─_dev_dm_11 253:12   0    50G  0 crypt /home/[user name]
+└─nvme0n1p4        259:4    0   200G  0 part  
+```
+
+## user real
+
+```
+useradd -d /home/[user name] user
+```
+
+```
+chown -R user:user /home/[user name]
+```
+
+```
+passwd user
+```
+> password must same like luks for this partition
