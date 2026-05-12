@@ -43,7 +43,7 @@ parted /dev/[nama partisi] mklabel gpt
 
 ## Cryptsetup
 ```
-sudo cryptsetup luksFormat --type luks2 \ 
+sudo cryptsetup luksFormat --type luks2 \
 --align-payload 4096 \
 --sector-size 4096 \
 --label "proc" \
