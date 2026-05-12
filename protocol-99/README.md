@@ -267,25 +267,33 @@ mount -o rw,nodev,nosuid,relatime /dev/proc/[name dir] /mnt/home/[name]
 ## swap
 
 ```
-swapon /dev/proc/swap
+swapon /dev/[swap partition]
 ```
 
 ## Core System
 
 ### AMD
 ```
-pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-amdgpu linux-firmware-atheros linux-firmware-other mkinitcpio amd-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
+pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-amd linux-firmware-atheros linux-firmware-other mkinitcpio amd-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
 ```
 
 ### INTEL
 ```
-pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-intelgpu linux-firmware-atheros linux-firmware-other mkinitcpio intel-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
+pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-intel linux-firmware-atheros linux-firmware-other mkinitcpio intel-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
 ```
 
 ## copy network
 
-```lagu
+```
 cp /etc/systemd/network/* /mnt/etc/systemd/network/
+```
+
+```
+mkdir -p /mnt/var/lib/iwd
+```
+
+```
+cp /var/lib/iwd/*.psk /mnt/var/lib/iwd
 ```
 
 ## generate fstab
