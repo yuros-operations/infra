@@ -284,7 +284,7 @@ pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux
 
 ## copy network
 
-```
+```lagu
 cp /etc/systemd/network/* /mnt/etc/systemd/network/
 ```
 
@@ -805,7 +805,7 @@ FILES=()
 ##   NOTE: If you have /usr on a separate partition, you MUST include the
 #    usr and fsck hooks.
 #HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems fsck)
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont encrypt lvm2 block filesystems fsck)
+HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt lvm2 block filesystems fsck)
 
 
 # COMPRESSION
