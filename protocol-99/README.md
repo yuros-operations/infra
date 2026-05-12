@@ -22,10 +22,10 @@
 | 3         | 4     | proc   | vaud     | 512M   | /mnt/var/log/audit    | xfs     |
 | 3         | 5     | proc   | vtmp     | 1G     | /mnt/var/tmp/         | xfs     |
 | 3         | 6     | proc   | vpac     | 2.5G   | /mnt/var/cache/pacman | xfs     |
-| 3         | 7     | proc   | temp     | 2G     | /mnt/var/tmp/         | xfs     |
-| 3         | 8     | proc   | home     | 1G     | /mnt/var/tmp/         | xfs     |
-| 3         | 9     | proc   | srvc     | 1G     | /mnt/var/tmp/         | xfs     |
-| 3         | 10    | proc   | [custom] | 50G    | /mnt/var/tmp/         | luks    |
+| 3         | 7     | proc   | temp     | 2G     | /mnt/tmp/         | xfs     |
+| 3         | 8     | proc   | home     | 1G     | /mnt/home         | xfs     |
+| 3         | 9     | proc   | srvc     | 1G     | /mnt/srvc/http         | xfs     |
+| 3         | 10    | proc   | [custom] | 50G    | /mnt/home/[username]         | luks    |
 
 ## Mengembalikan hardisk ke stingan pabrik
 ```
