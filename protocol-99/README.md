@@ -1,4 +1,4 @@
-<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/941333e1-c260-42cc-aaea-cec2363efa74" /># base installation
+# base installation
 
 ## disk layout
 
