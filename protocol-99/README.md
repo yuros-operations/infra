@@ -1013,7 +1013,7 @@ Edit the `pam_mount` configuration file at `/etc/security/pam_mount.conf.xml`. Y
 nvim /etc/pam.d/system-login
 ```
 > adjust like the lines below
-```
+```/etc/pam.d/system-login
 #%PAM-1.0
 
 auth       required   pam_shells.so
@@ -1041,7 +1041,7 @@ session    required   pam_env.so
 
 You must tell the system to use `pam_mount` during the login process. Edit `/etc/pam.d/system-login` to include the following lines in the correct sections:
 
-```pam
+```/etc/pam.d/system-login
 # Add to the 'auth' section
 auth        required    pam_mount.so
 
