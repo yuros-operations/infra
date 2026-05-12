@@ -258,12 +258,12 @@ swapon /dev/proc/sawp
 
 ### AMD
 ```
-pacstrap /mnt linux-hardened linux-harderned-headers linux-firmware-realtek linux-firmware-amdgpu linux-firmware-atheros linux-firmware-other mkinitcpio amd-ucode base base-devel git base neonvim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
+pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-amdgpu linux-firmware-atheros linux-firmware-other mkinitcpio amd-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
 ```
 
 ### INTEL
 ```
-pacstrap /mnt linux-hardened linux-harderned-headers linux-firmware-realtek linux-firmware-intelgpu linux-firmware-atheros linux-firmware-other mkinitcpio intel-ucode base base-devel git base neonvim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
+pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-intelgpu linux-firmware-atheros linux-firmware-other mkinitcpio intel-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
 ```
 
 ## copy network
