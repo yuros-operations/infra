@@ -52,7 +52,7 @@ sudo cryptsetup luksFormat --type luks2 \
 > example : sudo cryptsetup luksFormat --type luks2 --align-payload 4096 --sector-size 4096 --label "proc" /dev/nvme0n1p3
 
 ```
-cryptsetup open /dev/[nama partisi] proc \ 
+cryptsetup open /dev/[nama partisi] proc \
 --perf-no_read_workqueue \
 --perf-no_write_workqueue \
 --persistent
