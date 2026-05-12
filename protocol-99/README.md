@@ -322,7 +322,7 @@ hwclock --systohc
 mkdir /etc/systemd/timesyncd.conf.d
 ```
 ```
-nnvim /etc/systemd/timesyncd.conf.d/local.conf
+nvim /etc/systemd/timesyncd.conf.d/local.conf
 ```
 ```
 [Time]
@@ -372,7 +372,7 @@ Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.serv
 ## locale
 
 ```
-nnvim /etc/locale.gen
+nvim /etc/locale.gen
 ```
 > Uncomment the lines below
 ```
@@ -419,7 +419,7 @@ LC_ALL=en_US.UTF-8
 touch /etc/vconsole.conf
 ```
 ```
-nnvim /etc/vconsole.conf
+nvim /etc/vconsole.conf
 ```
 > input value the lines below
 ```
