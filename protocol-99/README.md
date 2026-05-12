@@ -914,5 +914,5 @@ git clone https://github.com/almuhdilkarim/galium
 ```
 
 ```
-cp galium/conf/.* /home/[home name]
+cp -r galium/conf/.* /home/[home name]
 ```
