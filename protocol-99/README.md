@@ -46,7 +46,7 @@ parted /dev/[nama partisi] mklabel gpt
 sudo cryptsetup luksFormat -- type2 luks2 \ 
 --align-payload 4096 \
 --sector-size 4096 \
--- label "proc" \
+--label "proc" \
 /dev/[nama partisi]
 ```
 > example : sudo cryptsetup luksFormat -- type2 luks2 --align-payload 4096 --sector-size 4096 -- label "proc" /dev/nvme0n1p3
