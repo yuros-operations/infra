@@ -437,10 +437,6 @@ sudo pacman -S hyprland hyprlinkitagent hypridle hyprlock hyprshot xdg-desktop-p
 ## config desktop
 
 ```
-rm .bash-profile .bashrc
-```
-
-```
 git clone https://github.com/almuhdilkarim/galium
 ```
 
