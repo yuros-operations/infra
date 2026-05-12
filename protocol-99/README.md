@@ -49,7 +49,7 @@ sudo cryptsetup luksFormat --type luks2 \
 --label "proc" \
 /dev/[nama partisi]
 ```
-> example : sudo cryptsetup luksFormat --type luks2 --align-payload 4096 --sector-size 4096 -- label "proc" /dev/nvme0n1p3
+> example : sudo cryptsetup luksFormat --type luks2 --align-payload 4096 --sector-size 4096 --label "proc" /dev/nvme0n1p3
 
 ```
 cryptsetup open /dev/[nama partisi] proc \ 
@@ -57,7 +57,7 @@ cryptsetup open /dev/[nama partisi] proc \
 --perf-no_write_workqueue \
 --persistent
 ```
-> example : cryptsetup open /dev/nvme0n1p3 proc --pref-no_read_workqueue --pref-no_write_workqueue --persistent
+> example : cryptsetup open /dev/nvme0n1p3 proc --perf-no_read_workqueue --perf-no_write_workqueue --persistent
 
 
 ## create physical volume
