@@ -954,7 +954,7 @@ Edit the `pam_mount` configuration file at `/etc/security/pam_mount.conf.xml`. Y
 <volume 
     user="your_username" 
     fstype="crypt" 
-    path="/dev/nvme0n1p3" 
+    path="/dev/partition_name" 
     mountpoint="/home/your_username" 
 />
 ```
