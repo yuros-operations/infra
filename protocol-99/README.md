@@ -431,7 +431,7 @@ FONT_MAP=8859-2
 ## package desktop
 
 ```
-sudo pacman -S hyprland hyperlinkitagent hyperidle hyperlock hypershot xdg-desktop-portal-hyperland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt-5wayland qt-6 wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-exif-tools wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator
+sudo pacman -S hyprland hyprlinkitagent hypridle hyprlock hyprshot xdg-desktop-portal-hyprland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-image-exiftool wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator
 ```
 
 ## config desktop
