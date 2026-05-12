@@ -274,12 +274,12 @@ swapon /dev/[swap partition]
 
 ### AMD
 ```
-pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-amd linux-firmware-atheros linux-firmware-other mkinitcpio amd-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
+pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-amd linux-firmware-atheros linux-firmware-other mkinitcpio amd-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd apparmor --noconfirm
 ```
 
 ### INTEL
 ```
-pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-intel linux-firmware-atheros linux-firmware-other mkinitcpio intel-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
+pacstrap /mnt linux-hardened linux-hardened-headers linux-firmware-realtek linux-firmware-intel linux-firmware-atheros linux-firmware-other mkinitcpio intel-ucode base base-devel git base neovim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd apparmor --noconfirm
 ```
 
 ## copy network
@@ -439,7 +439,7 @@ FONT_MAP=8859-2
 ## package desktop
 
 ```
-sudo pacman -S hyprland hyprlinkitagent hypridle hyprlock hyprshot xdg-desktop-portal-hyprland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-image-exiftool wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator
+sudo pacman -S hyprland hyprpolkitagent hypridle hyprlock hyprshot xdg-desktop-portal-hyprland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-image-exiftool wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator 
 ```
 
 ## config desktop
