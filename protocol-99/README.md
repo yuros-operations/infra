@@ -239,31 +239,6 @@ mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/vtmp /mnt/var/tmp
 mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/temp /mnt/tmp
 ```
 
-## null (menyesuaikan)
-```
-sudo cryptsetup luksFormat --type luks2 \
---align-payload 4096 \
---sector-size 4096 \
---label "dm" \
-/dev/proc/[user name]
-```
-```
-cryptsetup open /dev/proc/[user name] _dev_dm_11 \
---perf-no_read_workqueue \
---perf-no_write_workqueue \
---persistent
-```
-```
-mkfs.xfs -q -s size=4096 /dev/mapper/_dev_dm_11
-```
-```
-mkdir -p /mnt/home/[name]
-```
-
-```
-mount -o rw,nodev,nosuid,relatime /dev/proc/[name dir] /mnt/home/[name]
-```
-
 ## swap
 
 ```
@@ -943,3 +918,61 @@ git clone https://github.com/almuhdilkarim/galium
 ```
 cp -r galium/conf/.* /srv/http
 ```
+## after login user
+### preparation
+```
+sudo cryptsetup luksFormat --type luks2 \
+--align-payload 4096 \
+--sector-size 4096 \
+--label "dm" \
+/dev/proc/[user name]
+```
+```
+sudo cryptsetup open /dev/proc/[user name] _dev_dm_11 \
+--perf-no_read_workqueue \
+--perf-no_write_workqueue \
+--persistent
+```
+```
+sudo mkfs.xfs -q -s size=4096 /dev/mapper/_dev_dm_11
+```
+```
+sudo mkdir -p /mnt/home/[name]
+```
+
+```
+sudo mount -o rw,nodev,nosuid,relatime /dev/proc/[name dir] /mnt/home/[name]
+```
+```
+sudo pacman -S pam_mount
+```
+### Configure the Volume
+Edit the `pam_mount` configuration file at `/etc/security/pam_mount.conf.xml`. You need to add a `<volume>` entry for your encrypted device.
+
+```xml
+<!-- Example entry for a LUKS partition -->
+<volume 
+    user="your_username" 
+    fstype="crypt" 
+    path="/dev/nvme0n1p3" 
+    mountpoint="/home/your_username" 
+/>
+```
+*   **path:** The identifier for your encrypted partition (e.g., `/dev/sdb1` or a UUID).
+*   **mountpoint:** Where the partition should be accessible after unlocking.
+*   **options:** `allow-discard` is useful for SSD performance.
+
+### Update PAM Configuration
+You must tell the system to use `pam_mount` during the login process. Edit `/etc/pam.d/system-login` to include the following lines in the correct sections:
+
+```pam
+# Add to the 'auth' section
+auth        required    pam_mount.so
+
+# Add to the 'session' section
+session     optional    pam_mount.so
+```
+*Note: If you use a Display Manager (like GDM or SDDM), ensure its specific PAM file also includes these or inherits from `system-login`.*
+
+### Verification
+After saving the files, log out and log back in. The partition should automatically prompt for the password (via the login screen) and mount it to the specified location. You can verify this by running `lsblk` or `mount`.
