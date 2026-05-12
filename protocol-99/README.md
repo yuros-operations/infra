@@ -617,7 +617,7 @@ nvim /etc/sudo.conf
 adding on last line
 ```
 ## Config Log
-Defaults logfile="/var/log/sudo.log"
+Defauhardened logfile="/var/log/sudo.log"
 ```
 ### network
 ```
@@ -641,7 +641,7 @@ systemctl enable systemd-resolved
 ### boot directory
 #### intel server
 ```
-rm /boot/initramfs-linux-lts*
+rm /boot/initramfs-linux-hardened*
 ```
 ```
 mkdir -p /boot/efi /boot/efi/linux /boot/efi/systemd /boot/efi/rescue /boot/efi/boot
@@ -650,12 +650,12 @@ mkdir -p /boot/efi /boot/efi/linux /boot/efi/systemd /boot/efi/rescue /boot/efi/
 mkdir /boot/kernel
 ```
 ```
-mv /boot/intel-ucode.img /boot/vmlinuz-linux-lts /boot/kernel
+mv /boot/intel-ucode.img /boot/vmlinuz-linux-hardened /boot/kernel
 ```
 
 #### amd server
 ```
-rm /boot/initramfs-linux-lts*
+rm /boot/initramfs-linux-hardened*
 ```
 ```
 mkdir -p /boot/efi /boot/efi/linux /boot/efi/systemd /boot/efi/rescue /boot/efi/boot
@@ -664,7 +664,7 @@ mkdir -p /boot/efi /boot/efi/linux /boot/efi/systemd /boot/efi/rescue /boot/efi/
 mkdir /boot/kernel
 ```
 ```
-mv /boot/amd-ucode.img /boot/vmlinuz-linux-lts /boot/kernel
+mv /boot/amd-ucode.img /boot/vmlinuz-linux-hardened /boot/kernel
 ```
 
 ### kernel parameter
@@ -878,49 +878,49 @@ HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole sd-enc
 #### configure linux preset
 
 ```
-nvim /etc/mkinitcpio.d/linux-lts.preset
+nvim /etc/mkinitcpio.d/linux-hardened.preset
 ```
 
 ```
-# mkinitcpio preset file for the 'linux-lts' package
+# mkinitcpio preset file for the 'linux-hardened' package
 
 ALL_config="/etc/mkinitcpio.conf"
-ALL_kver="/boot/vmlinuz-linux-lts"
-#ALL_kerneldest="/boot/vmlinuz-linux-lts"
+ALL_kver="/boot/vmlinuz-linux-hardened"
+#ALL_kerneldest="/boot/vmlinuz-linux-hardened"
 
 PRESETS=('default')
 #PRESETS=('default' 'fallback')
 
 #default_config="/etc/mkinitcpio.conf"
-default_image="/boot/initramfs-linux-lts.img"
-#default_uki="/efi/Linux/arch-linux-lts.efi"
+default_image="/boot/initramfs-linux-hardened.img"
+#default_uki="/efi/Linux/arch-linux-hardened.efi"
 #default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
 
 #fallback_config="/etc/mkinitcpio.conf"
-#fallback_image="/boot/initramfs-linux-lts-fallback.img"
-#fallback_uki="/efi/EFI/Linux/arch-linux-lts-fallback.efi"
+#fallback_image="/boot/initramfs-linux-hardened-fallback.img"
+#fallback_uki="/efi/EFI/Linux/arch-linux-hardened-fallback.efi"
 #fallback_options="-S autodetect"
 ```
 
 > change like below
 ```
-# mkinitcpio preset file for the 'linux-lts' package
+# mkinitcpio preset file for the 'linux-hardened' package
 
 ALL_config="/etc/mkinitcpio.d/default.conf"
-ALL_kver="/boot/kernel/vmlinuz-linux-lts"
-ALL_kerneldest="/boot/kernel/vmlinuz-linux-lts"
+ALL_kver="/boot/kernel/vmlinuz-linux-hardened"
+ALL_kerneldest="/boot/kernel/vmlinuz-linux-hardened"
 
 PRESETS=('default')
 #PRESETS=('default' 'fallback')
 
 #default_config="/etc/mkinitcpio.conf"
-#efault_image="/boot/initramfs-linux-lts.img"
-default_uki="/boot/efi/linux/arch-linux-lts.efi"
+#efault_image="/boot/initramfs-linux-hardened.img"
+default_uki="/boot/efi/linux/arch-linux-hardened.efi"
 #default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
 
 #fallback_config="/etc/mkinitcpio.conf"
-#fallback_image="/boot/initramfs-linux-lts-fallback.img"
-#fallback_uki="/efi/EFI/Linux/arch-linux-lts-fallback.efi"
+#fallback_image="/boot/initramfs-linux-hardened-fallback.img"
+#fallback_uki="/efi/EFI/Linux/arch-linux-hardened-fallback.efi"
 #fallback_options="-S autodetect"
 ```
 ```
