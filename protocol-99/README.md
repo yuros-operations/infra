@@ -939,7 +939,7 @@ sudo pacman -S pam_mount
 nvim /etc/security/pam_mount.conf.xml
 ```
 > adjust like the lines below
-```
+```/etc/security/pam_mount.conf.xml
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE pam_mount SYSTEM "pam_mount.conf.xml.dtd">
 <!--
