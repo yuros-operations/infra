@@ -6,13 +6,26 @@
 
 ### storage 1 
 
-total size 50G
-
 | disk | partition | type              | luks  | lvm   | label    | size      | format | mount                      |
 | ---- | --------- | ----------------- | ----- | ----- | -------- | --------- | ------ | -------------------------- |
 | 0    | 1         | efi                | false | false | boot     | 3.9G      | fat 32 | /boot                      |
 | 0    | 2         | linux file system  | true  | false | swap     | 4G        | swap   | swapon                     |
 | 0    | 3         | linux file system  | true  | true  | proc     | 85G       | luks   | see logical volume proc    |
+
+#### logical volume proc
+| partition | list  | group  | name     | size   | mount                | format |
+| --------- | ----- | ------ | ----     | ------ | --------------------- | --------|
+| 3         | 1     | proc   | ring     | 1G     |                       | xfs     |
+| 3         | 2     | proc   | root     | 20G    | /mnt                  | xfs     |
+| 3         | 2     | proc   | vars     | 5G     | /mnt/var              | xfs     |
+| 3         | 3     | proc   | vlog     | 1G     | /mnt/var/log/         | xfs     |
+| 3         | 4     | proc   | vaud     | 512M   | /mnt/var/log/audit    | xfs     |
+| 3         | 5     | proc   | vtmp     | 1G     | /mnt/var/tmp/         | xfs     |
+| 3         | 6     | proc   | vpac     | 2.5G   | /mnt/var/cache/pacman | xfs     |
+| 3         | 7     | proc   | temp     | 2G     | /mnt/var/tmp/         | xfs     |
+| 3         | 8     | proc   | home     | 1G     | /mnt/var/tmp/         | xfs     |
+| 3         | 9     | proc   | srvc     | 1G     | /mnt/var/tmp/         | xfs     |
+| 3         | 10    | proc   | [custom] | 50G    | /mnt/var/tmp/         | luks    |
 
 ## Mengembalikan hardisk ke stingan pabrik
 ```
@@ -882,4 +895,10 @@ umount -R /mnt
 
 ```
 reboot
+```
+
+# after installation
+
+```
+sudo pacman -S hyprland hyperlinkitagent hyperidle hyperlock hypershot xdg-desktop-portal-hyperland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt-5wayland qt-6 wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-exif-tools wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator
 ```
