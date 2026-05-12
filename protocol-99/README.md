@@ -637,7 +637,7 @@ touch /etc/cmdline.d/{01-boot.conf,02-mods.conf,03-secs.conf,04-perf.conf,05-net
 ```
 ### 01-boot
 ```
-echo "rd.luks.name=UUID=$(blkid -s UUID -o value /dev/nvme0n1p3)=proc root=/dev/proc/root" > /etc/cmdline.d/01-boot.conf
+echo "rd.luks.name=$(blkid -s UUID -o value /dev/nvme0n1p3)=proc root=/dev/proc/root" > /etc/cmdline.d/01-boot.conf
 ```
 
 ### 03-secs
