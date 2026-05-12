@@ -245,10 +245,10 @@ sudo cryptsetup luksFormat --type luks2 \
 --align-payload 4096 \
 --sector-size 4096 \
 --label "dm" \
-/dev/[nama partisi]
+/dev/proc/[user name]
 ```
 ```
-cryptsetup open /dev/[nama partisi] _dev_dm_11 \
+cryptsetup open /dev/proc/[user name] _dev_dm_11 \
 --perf-no_read_workqueue \
 --perf-no_write_workqueue \
 --persistent
