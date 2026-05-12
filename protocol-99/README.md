@@ -4,15 +4,15 @@
 
 ## physical layout 
 
-### storage 1 
+### storage 1 (minimum)
 
 | disk | partition | type              | luks  | lvm   | label    | size      | format | mount                      |
 | ---- | --------- | ----------------- | ----- | ----- | -------- | --------- | ------ | -------------------------- |
 | 0    | 1         | efi                | false | false | boot     | 3.9G      | fat 32 | /boot                      |
 | 0    | 2         | linux file system  | true  | false | swap     | 4G        | swap   | swapon                     |
-| 0    | 3         | linux file system  | true  | true  | proc     | 85G       | luks   | see logical volume proc    |
+| 0    | 3         | linux file system  | true  | true  | proc     | 95G       | luks   | see logical volume proc    |
 
-#### logical volume proc
+#### logical volume proc (minimum)
 | partition | list  | group  | name     | size   | mount                | format |
 | --------- | ----- | ------ | ----     | ------ | --------------------- | --------|
 | 3         | 1     | proc   | ring     | 1G     |                       | xfs     |
@@ -105,15 +105,11 @@ lvcreate -L 512M proc -n vaud
 ```
 
 ```
-lvcreate -L 2G proc -n tmp
+lvcreate -L 2G proc -n temp
 ```
 
 ```
 lvcreate -L 1G proc -n srvc
-```
-
-```
-lvcreate -L 5G proc -n vars
 ```
 
 ```
@@ -158,10 +154,6 @@ mkfs.xfs -q -s size=4096 /dev/proc/tmp
 
 ```
 mkfs.xfs -q -s size=4096 /dev/proc/srvc
-```
-
-```
-mkfs.xfs -q -s size=4096 /dev/proc/vars
 ```
 
 ```
