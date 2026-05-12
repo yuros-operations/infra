@@ -62,7 +62,7 @@ cryptsetup open /dev/[nama partisi] proc \
 
 ## create physical volume
 ```
-pvcreate --dataaligment 4096 /dev/mapper/proc
+pvcreate --dataalignment 4096 /dev/mapper/proc
 ```
 
 ## create virtual group
