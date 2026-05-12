@@ -49,7 +49,7 @@ sudo cryptsetup luksFormat -- type2 luks2 \
 --label "proc" \
 /dev/[nama partisi]
 ```
-> example : sudo cryptsetup luksFormat -- type2 luks2 --align-payload 4096 --sector-size 4096 -- label "proc" /dev/nvme0n1p3
+> example : sudo cryptsetup luksFormat --type luks2 --align-payload 4096 --sector-size 4096 -- label "proc" /dev/nvme0n1p3
 
 ```
 cryptsetup open /dev/[nama partisi] proc \ 
