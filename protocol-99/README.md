@@ -267,7 +267,7 @@ mount -o rw,nodev,nosuid,relatime /dev/proc/[name dir] /mnt/home/[name]
 ## swap
 
 ```
-swapon /dev/proc/sawp
+swapon /dev/proc/swap
 ```
 
 ## Core System
