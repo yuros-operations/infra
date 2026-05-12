@@ -145,11 +145,7 @@ mkfs.xfs -q -s size=4096 /dev/proc/home
 ```
 
 ```
-mkfs.xfs -q -s size=4096 /dev/proc/vaud
-```
-
-```
-mkfs.xfs -q -s size=4096 /dev/proc/tmp
+mkfs.xfs -q -s size=4096 /dev/proc/temp
 ```
 
 ```
