@@ -8,3 +8,7 @@ sudo vgs
 sudo lvresize -r -L +20G /dev/vgdata/lvroot
 ```
 > Use the + sign if you want to increase the size. Otherwise, do not include it, because the size will be changed directly to the specified disk size.
+```
+df -h
+```
+> “Use df -h to check whether the storage size has been updated or not.”
