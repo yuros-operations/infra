@@ -197,7 +197,7 @@ mkdir -p /mnt/var/log/audit
 ```
 
 ```
-mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/vaud /mnt/var/audit
+mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/vaud /mnt/var/log/audit
 ```
 
 ## cache & pacman
