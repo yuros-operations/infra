@@ -170,7 +170,7 @@ mount /dev/proc/root /mnt
 
 ## boot & var
 ```
-mkdir -p /mnt/{boot,home,var,tmp,srvc/http}
+mkdir -p /mnt/{boot,home,var,tmp,srv/http}
 ```
 
 ```
@@ -209,10 +209,12 @@ mkdir -p /mnt/var/cache /mnt/var/cache/pacman
 mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/vpac /mnt/var/cache/pacman
 ```
 
-## swapon
+## home
 ```
 mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/home /mnt/home
 ```
+
+## http
 
 ```
 mount -o rw,nodev,noexec,nosuid,relatime /dev/proc/srvc /mnt/srv/http
@@ -246,6 +248,12 @@ mkdir -p /mnt/home/[name]
 mount -o rw,nodev,nosuid,relatime /dev/proc/[name dir] /mnt/home/[name]
 ```
 
+## swap
+
+```
+swapon /dev/proc/sawp
+```
+
 ## Core System
 
 ### AMD
@@ -257,10 +265,6 @@ pacstrap /mnt linux-hardened linux-harderned-headers linux-firmware-realtek linu
 ```
 pacstrap /mnt linux-hardened linux-harderned-headers linux-firmware-realtek linux-firmware-intelgpu linux-firmware-atheros linux-firmware-other mkinitcpio intel-ucode base base-devel git base neonvim lvm2 openssh iptables-nft firewalld rsync wget tuned which xfsprogs kitty-terminfo reflector iwd --noconfirm
 ```
-
-catatan
-untuk home pribadi itu noexec nya di hapus agar bisa mengeksekusi
-package kitty-terminfo dan reflector
 
 ## copy network
 
