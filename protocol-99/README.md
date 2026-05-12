@@ -53,8 +53,8 @@ sudo cryptsetup luksFormat -- type2 luks2 \
 
 ```
 cryptsetup open /dev/[nama partisi] proc \ 
---pref-no_read_workqueue \
---pref-no_write_workqueue \
+--perf-no_read_workqueue \
+--perf-no_write_workqueue \
 --persistent
 ```
 > example : cryptsetup open /dev/nvme0n1p3 proc --pref-no_read_workqueue --pref-no_write_workqueue --persistent
