@@ -427,9 +427,30 @@ FONT=lat2-16
 FONT_MAP=8859-2
 ```
 
-## user
+
+## package desktop
+
+```
+sudo pacman -S hyprland hyperlinkitagent hyperidle hyperlock hypershot xdg-desktop-portal-hyperland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt-5wayland qt-6 wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-exif-tools wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator
+```
+
+## config desktop
+
+```
+rm .bash-profile .bashrc
+```
+
+```
+git clone https://github.com/almuhdilkarim/galium
+```
+
+```
+cp -r galium/conf/.* /etc/skel
+```
 
 #### change /etc/sudoers
+
+## user
 
 > tambahkan http pada sudoers
 ```
@@ -443,6 +464,7 @@ nvim /etc/sudoers
 ```/etc/sudoers
 root ALL=(ALL:ALL) ALL
 http ALL=(ALL:ALL) ALL
+user ALL=(ALL:ALL) ALL
 ```
 ```
 chown -R http:http /srv/http
@@ -478,6 +500,20 @@ su http
 sudo su
 ```
 
+## user real
+
+```
+useradd -d /home/[user name] user
+```
+
+```
+chown -R user:user /home/[user name]
+```
+
+```
+passwd user
+```
+> password must same like luks for this partition
 ## os release
 
 ```
@@ -898,24 +934,4 @@ umount -R /mnt
 
 ```
 reboot
-```
-
-# after installation
-
-```
-sudo pacman -S hyprland hyperlinkitagent hyperidle hyperlock hypershot xdg-desktop-portal-hyperland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt-5wayland qt-6 wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-exif-tools wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator
-```
-
-## config desktop
-
-```
-rm .bash-profile .bashrc
-```
-
-```
-git clone https://github.com/almuhdilkarim/galium
-```
-
-```
-cp -r galium/conf/.* /home/[home name]
 ```
