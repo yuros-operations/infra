@@ -442,16 +442,6 @@ FONT_MAP=8859-2
 sudo pacman -S hyprland hyprpolkitagent hypridle hyprlock hyprshot xdg-desktop-portal-hyprland pipewire pipewire-pulse pipewire-jack wireplumber pamixer uwsm libnewt kitty qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd ttf-droid ttf-opensans waybar mako tuned-ppd mpd mpc yt-dlp libsecret gnome-keyring superfile perl-image-exiftool wofi wl-clipboard cliphist firefox-developer-edition btop rsync bash-completion pavucontrol zram-generator 
 ```
 
-## config desktop
-
-```
-git clone https://github.com/almuhdilkarim/galium
-```
-
-```
-cp -r galium/conf/.* /etc/skel
-```
-
 #### change /etc/sudoers
 
 ## user
@@ -938,4 +928,18 @@ umount -R /mnt
 
 ```
 reboot
+```
+
+## after installation
+
+```
+rm .bashrc .bash_profile
+```
+
+```
+git clone https://github.com/almuhdilkarim/galium
+```
+
+```
+cp -r galium/conf/.* /srv/http
 ```
